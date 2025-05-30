@@ -119,7 +119,7 @@ public class ProductApp {
 				break;
 			case 2: // 물품 목록.
 				slowPrint("물품목록을 불러옵니다.", 50);
-				List<Product> list = mgm.ProductList();
+				List<Product> list = mgm.productList();
 
 				System.out.println("[No][ 물품명 ][카테고리][물품가격(원)][물품수량(EA)]");
 				System.out.println("-----------------------------------------------");
@@ -177,7 +177,9 @@ public class ProductApp {
 					System.out.println("❌삭제 실패❌");
 				}
 				break;
-			case 6:
+			case 6: // 물품 검색하기.
+				System.out.println("물품의 정보를 입력하세요▷");
+				
 
 			case 7:
 				System.out.println("이전메뉴로 돌아갑니다");
@@ -187,45 +189,45 @@ public class ProductApp {
 		} // end of while.
 	} // end of execute2.
 
-	public void execute3() {
-		Scanner scn = new Scanner(System.in);
-		ProductQuanManagement Qmgm;
-
-		boolean run = true;
-		while (run) {
-			slowPrint("==========================================", 30);
-			System.out.println("----------------📦수량관리------------------");
-			System.out.println("------------------------------------------");
-			System.out.println("-------|1.수량추가|2.수량수정|3.수량조회|-------");
-			System.out.println("------------------------------------------");
-			System.out.println("-------|4.수량삭제|5.이력조회|6.이전메뉴|-------");
-			System.out.println("------------------------------------------");
-			System.out.println("==========================================");
-			System.out.print("메뉴선택 ▶");
-
-			// 메뉴 선택.
-			int menu = scn.nextInt();
-			scn.nextLine();
-			switch (menu) {
-			case 1:
-
-			case 2:
-
-			case 3:
-
-			case 4:
-
-			case 5:
-
-			case 6:
-				System.out.println("프로그램을 종료합니다.");
-				run = false;
-//				Qmgm.save();
-			} // end of switch.
-
-		} // end of while.
-
-	} // end of execute3.
+//	public void execute3() {
+//		Scanner scn = new Scanner(System.in);
+//		ProductQuanManagement Qmgm;
+//
+//		boolean run = true;
+//		while (run) {
+//			slowPrint("==========================================", 30);
+//			System.out.println("----------------📦수량관리------------------");
+//			System.out.println("------------------------------------------");
+//			System.out.println("-------|1.수량추가|2.수량수정|3.수량조회|-------");
+//			System.out.println("------------------------------------------");
+//			System.out.println("-------|4.수량삭제|5.이력조회|6.이전메뉴|-------");
+//			System.out.println("------------------------------------------");
+//			System.out.println("==========================================");
+//			System.out.print("메뉴선택 ▶");
+//
+//			// 메뉴 선택.
+//			int menu = scn.nextInt();
+//			scn.nextLine();
+//			switch (menu) {
+//			case 1:
+//
+//			case 2:
+//
+//			case 3:
+//
+//			case 4:
+//
+//			case 5:
+//
+//			case 6:
+//				System.out.println("프로그램을 종료합니다.");
+//				run = false;
+////				Qmgm.save();
+//			} // end of switch.
+//
+//		} // end of while.
+//
+//	} // end of execute3.
 
 	public void executeGame() {
 		SlotMachine slot = new SlotMachine();
@@ -240,5 +242,4 @@ public class ProductApp {
 			System.out.println("아쉽지만, 다시 도전하세요!");
 		}
 	}
-}
-// end of class(ProductApp).
+}// end of class(ProductApp).

@@ -25,7 +25,7 @@ public class ProductManagementDAO implements ProductManagement {
 	}
 
 	@Override
-	public List<Product> ProductList() {
+	public List<Product> productList() {
 		return dao.select();
 	}
 

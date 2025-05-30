@@ -100,6 +100,29 @@ public class ProductDAO extends DAO {
 		}
 		return list;
 	}
+	// 검색
+	public List<Product> search() {
+		String sql = "select * from tbl_product order by product_no";
+		getConnect();
+		List<Product> list = new ArrayList<>(); // 컬렉션에 저장.
+		try {
+			psmt = conn.prepareStatement(sql);
+			rs = psmt.executeQuery(); // 조회.
+			while (rs.next()) {
+				Product product = new Product();
+				product.setPno(rs.getInt("product_no"));
+				product.setPname(rs.getString("product_name"));
+				product.setPcate(rs.getString("product_cate"));
+				product.setPcost(rs.getInt("product_cost"));
+				product.setPquan(rs.getInt("product_quan"));
+				// 추가.
+				list.add(product);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 	
 	// 상세보기.
 		public void detailInfo() {

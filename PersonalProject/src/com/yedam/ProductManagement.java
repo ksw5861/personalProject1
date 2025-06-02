@@ -11,6 +11,7 @@ public interface ProductManagement {
 	public boolean addProduct(Product product);// 등록.
 	public boolean modifyProduct(Product product);// 변경.
 	public boolean removeProduct(int pno);// 삭제.
+	public List<Product> searchProduct(String pcate);//검색.
 	public List<Product> productList();// 출력.
 	public void save();
 	

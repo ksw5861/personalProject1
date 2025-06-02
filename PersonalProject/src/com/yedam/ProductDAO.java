@@ -100,38 +100,40 @@ public class ProductDAO extends DAO {
 		}
 		return list;
 	}
-	// 검색
-	public List<Product> search() {
-		String sql = "select * from tbl_product order by product_no";
+	// 카테고리로 물품검색
+	public List<Product> search(String pcate) {
+		String sql = "select * from tbl_product where product_cate like ? "
+					+ "order by product_no";
 		getConnect();
-		List<Product> list = new ArrayList<>(); // 컬렉션에 저장.
+		List<Product> list1 = new ArrayList<>(); // 컬렉션에 저장.
 		try {
 			psmt = conn.prepareStatement(sql);
+	        psmt.setString(1, "%" + pcate + "%");
 			rs = psmt.executeQuery(); // 조회.
 			while (rs.next()) {
-				Product product = new Product();
-				product.setPno(rs.getInt("product_no"));
-				product.setPname(rs.getString("product_name"));
-				product.setPcate(rs.getString("product_cate"));
-				product.setPcost(rs.getInt("product_cost"));
-				product.setPquan(rs.getInt("product_quan"));
+				Product product1 = new Product();
+				product1.setPno(rs.getInt("product_no"));
+				product1.setPname(rs.getString("product_name"));
+				product1.setPcate(rs.getString("product_cate"));
+				product1.setPcost(rs.getInt("product_cost"));
+				product1.setPquan(rs.getInt("product_quan"));
 				// 추가.
-				list.add(product);
+				list1.add(product1);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return list;
+		return list1;
 	}
 	
 	// 상세보기.
-		public void detailInfo() {
-			// 글번호: 5    작성자: 홍길동
-			// 제목: 날씨가 좋아요
-			// 내용: 오늘 30도가 넘는데도 좋아요.
-			String strFormat = "물품이름: %d   물품카테고리: %s\n";
-			strFormat += "물품가격: %s\n";
-			strFormat += "물품상세정보: %s";
-			//System.out.printf(strFormat, pname, getPcate(), writer, content);
-		}
+//		public void detailInfo() {
+//			// 글번호: 5    작성자: 홍길동
+//			// 제목: 날씨가 좋아요
+//			// 내용: 오늘 30도가 넘는데도 좋아요.
+//			String strFormat = "물품이름: %d   물품카테고리: %s\n";
+//			strFormat += "물품가격: %s\n";
+//			strFormat += "물품상세정보: %s";
+//			//System.out.printf(strFormat, pname, getPcate(), writer, content);
+//		}
 }

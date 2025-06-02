@@ -2,13 +2,13 @@ package com.yedam;
 
 
 public enum SlotSymbol {
-    MONEY("🎰"),
+    SLOT("🎰"),
     DIAMOND("💎"),
     HEART("❤"),
     TROPHY("🏆"),
     CLOVER("🍀");
 
-    private final String symbol;
+    private String symbol;
 
     SlotSymbol(String symbol) {
         this.symbol = symbol;

@@ -17,17 +17,21 @@ public class ProductApp {
 		}
 		System.out.println();
 	}
+	
+	public static void screenClear() {
+        for (int i = 0; i < 30; i++) System.out.println(); // 공백 30줄 출력
+    }
 
 	public void execute1() {
 		Scanner scn = new Scanner(System.in);
 
 		boolean run = true;
 		while (run) {
-			System.out.println("로딩중");
-			slowPrint("==========================================", 50); // 50ms 간격으로 한 글자씩 출력
+			screenClear();
+			slowPrint("==========================================", 20); // 20ms 간격으로 한 글자씩 출력
 			System.out.println("-----------📦물품관리 프로그램📦--------------");
 			System.out.println("------------------------------------------");
-			System.out.println("----|1. 물품관리|2. 슬롯머신|3. 프로그램종료|----");
+			System.out.println("----|1. 물품관리|2.-------|3. 프로그램종료|----");
 			System.out.println("------------------------------------------");
 			System.out.println("==========================================");
 			System.out.print("메뉴선택 ▶");
@@ -41,13 +45,14 @@ public class ProductApp {
 				execute2();
 				break;
 
-			case 2: // 수량관리 실행.
-				slowPrint("슬롯머신을 불러옵니다.", 50);
+			case 2: // 실행.
+				screenClear();
+				slowPrint("슬롯머신을 불러옵니다.", 20);
 				executeGame();
 				break;
 
 			case 3:
-				slowPrint("프로그램을 종료하는중.....................", 50);
+				slowPrint("프로그램을 종료하는중.....................", 20);
 				System.out.println("end of prog.");
 				run = false;
 			} // end of switch.
@@ -79,7 +84,7 @@ public class ProductApp {
 		mgm = new ProductManagementDAO(); // 2) DB에 저장.
 		boolean run = true;
 		while (run) {
-			slowPrint("==========================================", 30);
+			slowPrint("==========================================", 20);
 			System.out.println("----------------📦물품관리------------------");
 			System.out.println("------------------------------------------");
 			System.out.println("-------|1.물품추가|2.목록조회|3.상세보기|-------");
@@ -112,13 +117,14 @@ public class ProductApp {
 				Product product = new Product(pno, pname, pcate, pcost, pquan);
 
 				if (mgm.addProduct(product)) {
-					System.out.println("✅등록 성공✅");
+					slowPrint("✅등록 성공✅",50);
 				} else {
-					System.out.println("❌등록 실패❌");
+					slowPrint("❌등록 실패❌",50);
 				}
 				break;
 			case 2: // 물품 목록.
-				slowPrint("물품목록을 불러옵니다.", 50);
+				screenClear();
+				slowPrint("물품의 전체목록을 불러옵니다.", 20);
 				List<Product> list = mgm.productList();
 
 				System.out.println("[No][ 물품명 ][카테고리][물품가격(원)][물품수량(EA)]");
@@ -140,6 +146,22 @@ public class ProductApp {
 				System.out.println("준비중입니다.");
 				break;
 			case 4: // 물품 정보 수정하기.
+				screenClear();
+				list = mgm.productList();
+				System.out.println("[No][ 물품명 ][카테고리][물품가격(원)][물품수량(EA)]");
+				System.out.println("-----------------------------------------------");
+				for (Product pdt : list) {
+					String short1 = shorten1(pdt.getPname());
+//					String short2 = shorten2(pdt.getPcate());
+					System.out.printf("[%-2s] %-5s %-6s %-10d   %-10d \n"//
+							, pdt.getPno()//
+							, short1//
+							, pdt.getPcate()
+//							, short2//
+							, pdt.getPcost()//
+							, pdt.getPquan());
+				}
+				System.out.println("-----------------------------------------------");
 				System.out.print("✏️수정할 물품번호▷ ");
 				pno = Integer.parseInt(scn.nextLine());
 
@@ -161,28 +183,62 @@ public class ProductApp {
 //				Product productRenew = new Product();
 //				productRenew.setPno(pno);
 				if (mgm.modifyProduct(product)) {
-					System.out.println("✅수정 완료✅");
+					slowPrint("✅수정 완료✅",50);
 				} else {
-					System.out.println("❌수정 실패❌");
+					slowPrint("❌수정 실패❌",50);
 				}
 				break;
 
 			case 5: // 물품 삭제하기.
+				screenClear();
+				list = mgm.productList();
+				System.out.println("[No][ 물품명 ][카테고리][물품가격(원)][물품수량(EA)]");
+				System.out.println("-----------------------------------------------");
+				for (Product pdt : list) {
+					String short1 = shorten1(pdt.getPname());
+//					String short2 = shorten2(pdt.getPcate());
+					System.out.printf("[%-2s] %-5s %-6s %-10d   %-10d \n"//
+							, pdt.getPno()//
+							, short1//
+							, pdt.getPcate()
+//							, short2//
+							, pdt.getPcost()//
+							, pdt.getPquan());
+				}
+				System.out.println("-----------------------------------------------");
 				System.out.print("🗑️삭제할 물품번호▷ ");
 				pno = Integer.parseInt(scn.nextLine());
 				if (mgm.removeProduct(pno)) {
 
-					System.out.println("🗑️삭제 완료🗑️");
+					slowPrint("🗑️삭제 완료🗑️",50);
 				} else {
-					System.out.println("❌삭제 실패❌");
+					slowPrint("❌삭제 실패❌",50);
 				}
 				break;
 			case 6: // 물품 검색하기.
-				System.out.println("물품의 정보를 입력하세요▷");
+				screenClear();
+				System.out.println("검색할 카테고리를 입력하세요▷");
+				pcate = scn.nextLine();
+				List<Product> list1 = mgm.searchProduct(pcate);
+				System.out.println("[No][ 물품명 ][카테고리][물품가격(원)][물품수량(EA)]");
+				System.out.println("-----------------------------------------------");
+				for (Product pdt : list1) {
+					String short1 = shorten1(pdt.getPname());
+//					String short2 = shorten2(pdt.getPcate());
+					System.out.printf("[%-2s] %-5s %-6s %-10d   %-10d \n"//
+							, pdt.getPno()//
+							, short1//
+							, pdt.getPcate()
+//							, short2//
+							, pdt.getPcost()//
+							, pdt.getPquan());
+				}
+				System.out.println("-----------------------------------------------");
+				break;
 				
 
 			case 7:
-				System.out.println("이전메뉴로 돌아갑니다");
+				slowPrint("이전메뉴로 돌아갑니다",50);
 				run = false;
 				mgm.save();
 			} // end of switch.

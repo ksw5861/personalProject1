@@ -12,14 +12,14 @@ public class Player {
         return money;
     }
 
-    // 돈을 넣는 메서드 (예: 당첨금 추가)
+    // 돈 추가메소드 (당첨시 현재 가진돈에 당첨금 추가)
     public void addMoney(int amount) {
         if (amount > 0) {
             money += amount;
         }
     }
 
-    // 돈을 쓰는 메서드 (예: 베팅, 구매 등)
+    // 돈 사용하는 메소드 ->bet amount 원씩베팅
     public boolean spendMoney(int amount) {
         if (amount > 0 && money >= amount) {
             money -= amount;

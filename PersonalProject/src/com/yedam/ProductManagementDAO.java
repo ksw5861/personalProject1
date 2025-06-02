@@ -20,6 +20,11 @@ public class ProductManagementDAO implements ProductManagement {
 	}
 
 	@Override
+	public List<Product> searchProduct(String pcate) {
+		return dao.search(pcate);
+	}
+	
+	@Override
 	public boolean removeProduct(int pno) {
 		return dao.delete(pno) == 1;
 	}

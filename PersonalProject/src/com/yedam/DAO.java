@@ -11,7 +11,7 @@ import java.sql.Statement;
  * 데이터베이스의 연결정보를 활용해서 세션획득.
  */
 public class DAO {
-	String url = "jdbc:oracle:thin:@localhost:1521:xe";
+	String url = "jdbc:oracle:thin:@192.168.0.17:1521:xe";
 	String id = "scott";
 	String pass = "tiger";
 	Connection conn;
